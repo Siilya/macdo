@@ -27,18 +27,17 @@ public class Panier implements sousController {
 
         GestionPanierLocal gestionPanier;
         HttpSession session = request.getSession();
-        gestionPanier = 
-                (GestionPanierLocal) session.getAttribute("gestionPanier");
+        gestionPanier
+                = (GestionPanierLocal) session.getAttribute("gestionPanier");
         if (gestionPanier == null) {
             gestionPanier = lookupGestionPanierLocal();
             session.setAttribute("gestionPanier", gestionPanier);
         }
 
-        
         String numProduit = request.getParameter("add");
-        
+
         System.out.println("numProduit : " + numProduit);
-       
+
         if (numProduit != null) {
 
             Long idProduit = Long.valueOf(numProduit);
@@ -52,7 +51,7 @@ public class Panier implements sousController {
 
         System.out.println("avant le webinf : " + gestionPanier.getPanier());
 
-        return "/WEB-INF/home.jsp";
+        return "/WEB-INF/panier.jsp";
     }
 
     private GestionPanierLocal lookupGestionPanierLocal() {
