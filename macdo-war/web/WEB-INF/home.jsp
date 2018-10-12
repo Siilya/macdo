@@ -29,8 +29,9 @@
                     <!--<a href="controler?section=CreationDonnees">Creation des données</a>-->
 
                     <div class="container"> 
-                        <c:url value="controler?section=CatalogueCtrl" var="catalogue"/>
+                        <c:url value="controler?section=CatalogueCtrl&ref=all" var="catalogue"/>
                         <c:import url="${catalogue}" />
+
                     </div>
                 </div>
 
@@ -73,7 +74,7 @@
             }
 
             function go(val) {
-                console.log("val : "+ val.getAttribute("produit"));
+                console.log("val : " + val.getAttribute("produit"));
                 url = "controler?section=Panier&add=" + val.getAttribute("produit");
                 console.log(url);
                 // alert( url);
@@ -94,7 +95,7 @@
                         d = document.getElementById("panier");
                         //console.log(d);
                         d.innerHTML = s;
-                        
+
                     } else {
                         alert("Problem retrieving XML data");
                     }

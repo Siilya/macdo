@@ -149,13 +149,13 @@ public class CreationDonnees implements CreationDonneesLocal {
         Produit produit9 = new Produit("PETITE FRITE", 1.8F, statut1, 
                 "Ce sont toujours les vedettes des restaurants. Créées à partir de pommes de terre à chair blanche, elles sont aussi longues que croustillantes. Cuites avec de l'huile végétale, elles sont servies avec du ketchup, de la sauce moutarde ou une sauce spéciale.", 
                 "./Images/petiteFrite.png");
-        produit9.getProprietes().add(propriete4);
-        produit9.setType(type4);
+        produit9.setType(type3);
         produit9.setTva(tva1);
         Produit produit10 = new Produit("MINUTE MAID® ORANGE (20CL)", 1.77F, statut2, 
                 "20cl", 
                 "./Images/minuteMaid20.png");
-        produit10.setType(type3);
+        produit10.getProprietes().add(propriete4);
+        produit10.setType(type4);
         produit10.setTva(tva1);
         Produit produit11 = new Produit("P'TITE POMME", 1.36F, statut2, 
                 "Apportez une note fruitée à votre repas. Craquez pour les savoureux quartiers de pommes croquants.", 

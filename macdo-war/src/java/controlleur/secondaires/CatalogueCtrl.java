@@ -1,6 +1,7 @@
 package controlleur.secondaires;
 
 import Beans.GestionCatalogueLocal;
+import Entites.Type;
 import java.io.Serializable;
 import java.util.List;
 import java.util.logging.Level;
@@ -22,36 +23,38 @@ public class CatalogueCtrl implements sousController, Serializable {
 //        return url;
 //    }
     
-    @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) {
-        GestionCatalogueLocal gestionCatalogue = lookupGestionCatalogueLocal();
-        
-        
-        List leCatalogue = gestionCatalogue.selectMenusCatalogue();
-        request.setAttribute("catalogue", leCatalogue);
-        leCatalogue = gestionCatalogue.selectProduitsCatalogue();
-        request.setAttribute("catalogue", leCatalogue);
-        String url= "/WEB-INF/catalogue.jsp";
-        return url;
-    }
-    
 //    @Override
 //    public String execute(HttpServletRequest request, HttpServletResponse response) {
-//        String idType = request.getParameter("idType");
 //        GestionCatalogueLocal gestionCatalogue = lookupGestionCatalogueLocal();
-//        List leCatalogue = null;
-//        if (idType.equals(null)) {
-//            leCatalogue = gestionCatalogue.selectMenusCatalogue();
-//            leCatalogue = gestionCatalogue.selectProduitsCatalogue();
-//        } else{
-//            leCatalogue = gestionCatalogue.selectMenusCatalogue(Long.valueOf(idType));
-//            leCatalogue = gestionCatalogue.selectProduitsCatalogue(Long.valueOf(idType));
-//        }
-//        
+//        List leCatalogue = gestionCatalogue.selectMenusCatalogue();
+//        request.setAttribute("catalogue", leCatalogue);
+//        leCatalogue = gestionCatalogue.selectProduitsCatalogue();
 //        request.setAttribute("catalogue", leCatalogue);
 //        String url= "/WEB-INF/catalogue.jsp";
 //        return url;
 //    }
+    
+    @Override
+    public String execute(HttpServletRequest request, HttpServletResponse response) {
+        String ref = request.getParameter("ref");
+        GestionCatalogueLocal gestionCatalogue = lookupGestionCatalogueLocal();
+        List leCatalogue;
+        System.out.println(">>>>>>>>>>>>>>>"+ ref);
+        if ("all".equals(ref)) {
+            leCatalogue = gestionCatalogue.selectTypesCatalogue();
+            request.setAttribute("type", "all");
+        }else if ("MENU".equals(ref)) {
+            leCatalogue = gestionCatalogue.selectMenusCatalogue(ref);
+            request.setAttribute("type", "menu");
+        }else{
+            leCatalogue = gestionCatalogue.selectProduitsCatalogue(ref);
+            request.setAttribute("type", "produit");
+        }
+           
+        request.setAttribute("catalogue", leCatalogue);
+        String url= "/WEB-INF/catalogue.jsp";
+        return url;
+    }
 
     private GestionCatalogueLocal lookupGestionCatalogueLocal() {
         try {
