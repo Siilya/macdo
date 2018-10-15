@@ -7,7 +7,7 @@
 
     <c:forEach items="${types}" var="t">
         <li class="nav-item">
-            <a class="nav-link" href="controler?section=CatalogueCtrl&ref=${t.nom}">
+            <a class="nav-link" href = "controler" onclick="choix('${t.nom}'); return false" >
                 <img class="image" style="max-height: 150px; width: auto;" src= "${t.image}" title="${t.nom}">${t.nom}</a>
         </li>
     </c:forEach>

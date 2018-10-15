@@ -29,7 +29,8 @@
                     <!--<a href="controler?section=CreationDonnees">Creation des données</a>-->
 
                     <div class="container"> 
-                        <c:url value="controler?section=CatalogueCtrl&ref=all" var="catalogue"/>
+
+                        <c:url value="controler?section=CatalogueCtrl&ref=${choix}" var="catalogue"/>
                         <c:import url="${catalogue}" />
 
                     </div>
@@ -73,16 +74,39 @@
                 return xmlhttp;
             }
 
+            function choix(selection) {
+                //alert("----------  fonction choix ---------------");
+                url = "controler?section=CatalogueCtrl&ref=" + selection;
+                //alert(url);
+                xmlhttp = getxmlhttp();
+                xmlhttp.onreadystatechange = function () {
+                    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                        s = xmlhttp.responseText;
+                        // alert( "("+s+")");
+                        //console.log(s);
+                        d = document.getElementById("catalogue");
+                        //console.log(d);
+                        d.innerHTML = s;
+
+                    }
+                }
+
+                xmlhttp.open("GET", url, true);
+                //      xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                xmlhttp.send(null);
+            }
+
+
+
             function go(val) {
                 console.log("val : " + val.getAttribute("produit"));
                 url = "controler?section=Panier&add=" + val.getAttribute("produit");
                 console.log(url);
-                // alert( url);
-
+                alert(url);
                 xmlhttp = getxmlhttp();
                 xmlhttp.onreadystatechange = xmlhttpChange;
                 xmlhttp.open("GET", url, true);
-//      xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
                 xmlhttp.send(null);
             }
 

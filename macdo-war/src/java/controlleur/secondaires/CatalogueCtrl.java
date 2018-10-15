@@ -14,33 +14,13 @@ import javax.servlet.http.HttpServletResponse;
 
 public class CatalogueCtrl implements sousController, Serializable {
     
-//    @Override
-//    public String execute(HttpServletRequest request, HttpServletResponse response) {
-//        GestionCatalogueLocal gestionCatalogue = lookupGestionCatalogueLocal();
-//        List leCatalogue = gestionCatalogue.selectTypesCatalogue();
-//        request.setAttribute("catalogue", leCatalogue);
-//        String url= "/WEB-INF/catalogue.jsp";
-//        return url;
-//    }
-    
-//    @Override
-//    public String execute(HttpServletRequest request, HttpServletResponse response) {
-//        GestionCatalogueLocal gestionCatalogue = lookupGestionCatalogueLocal();
-//        List leCatalogue = gestionCatalogue.selectMenusCatalogue();
-//        request.setAttribute("catalogue", leCatalogue);
-//        leCatalogue = gestionCatalogue.selectProduitsCatalogue();
-//        request.setAttribute("catalogue", leCatalogue);
-//        String url= "/WEB-INF/catalogue.jsp";
-//        return url;
-//    }
-    
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         String ref = request.getParameter("ref");
         GestionCatalogueLocal gestionCatalogue = lookupGestionCatalogueLocal();
         List leCatalogue;
         System.out.println(">>>>>>>>>>>>>>>"+ ref);
-        if ("all".equals(ref)) {
+        if (ref.isEmpty()) {
             leCatalogue = gestionCatalogue.selectTypesCatalogue();
             request.setAttribute("type", "all");
         }else if ("MENU".equals(ref)) {
